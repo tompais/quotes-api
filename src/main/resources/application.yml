@@ -1,0 +1,17 @@
+logging:
+  level:
+    reactor:
+      netty:
+        http:
+          client: DEBUG
+
+clients:
+  programming-quote:
+    host: 'https://programming-quotes-api.herokuapp.com'
+    get-quotes: '/Quotes'
+  inspirational-quote:
+    host: 'https://type.fit/api'
+    get-quotes: '/quotes'
+  chuck-norris-quote:
+    host: 'https://api.chucknorris.io'
+    get-quotes: '/jokes/random'
