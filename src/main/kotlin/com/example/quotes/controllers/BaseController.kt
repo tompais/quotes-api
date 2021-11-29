@@ -35,7 +35,11 @@ abstract class BaseController {
     }
 
     protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrNull(key: String): T? =
-        queryParamOrNull(key)?.uppercase()?.let<String, T>(::enumValueOf)
+        try {
+            queryParamOrNull(key)?.uppercase()?.let<String, T>(::enumValueOf)
+        } catch (iae: IllegalArgumentException) {
+            throw ResponseStatusException(BAD_REQUEST, "Couldn't parse query param [$key] to an enum", iae)
+        }
 
     protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrDefault(key: String, defaultValue: T): T =
         getEnumValueOrNull<T>(key) ?: defaultValue
