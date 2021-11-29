@@ -13,7 +13,7 @@ class QuoteController(
     private fun ServerRequest.getLimit(): Int = getQueryParamAsIntOrDefault("limit", 10)
 
     private fun ServerRequest.getQuoteTypeOrRandom(): QuoteType =
-        getEnumValueOrDefault("quote_type", QuoteType.values().random())
+        getEnumValueOrRandom("quote_type")
 
     suspend fun getQuotes(serverRequest: ServerRequest): ServerResponse =
         buildResponse(quoteService.getQuotesAsync(serverRequest.getQuoteTypeOrRandom(), serverRequest.getLimit()))

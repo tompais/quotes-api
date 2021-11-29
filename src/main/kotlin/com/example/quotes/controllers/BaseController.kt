@@ -39,4 +39,7 @@ abstract class BaseController {
 
     protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrDefault(key: String, defaultValue: T): T =
         getEnumValueOrNull<T>(key) ?: defaultValue
+
+    protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrRandom(key: String): T =
+        getEnumValueOrDefault(key, enumValues<T>().random())
 }
