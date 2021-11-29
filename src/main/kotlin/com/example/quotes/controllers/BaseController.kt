@@ -33,4 +33,10 @@ abstract class BaseController {
     } catch (nfe: NumberFormatException) {
         throw ResponseStatusException(BAD_REQUEST, "Couldn't parse query param [$key] to a number", nfe)
     }
+
+    protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrNull(key: String): T? =
+        queryParamOrNull(key)?.uppercase()?.let<String, T>(::enumValueOf)
+
+    protected inline fun <reified T : Enum<T>> ServerRequest.getEnumValueOrDefault(key: String, defaultValue: T): T =
+        getEnumValueOrNull<T>(key) ?: defaultValue
 }
