@@ -14,19 +14,24 @@ import org.springframework.web.reactive.function.server.queryParamOrNull
 import org.springframework.web.server.ResponseStatusException
 
 abstract class BaseController {
+    protected fun getServerResponseBuilder(
+        httpStatus: HttpStatus,
+        contentType: MediaType
+    ): ServerResponse.BodyBuilder = ServerResponse.status(httpStatus).contentType(contentType)
+
     protected suspend fun buildResponse(
         body: Any,
         httpStatus: HttpStatus = OK,
         contentType: MediaType = APPLICATION_JSON
     ): ServerResponse =
-        ServerResponse.status(httpStatus).contentType(contentType).bodyValueAndAwait(body)
+        getServerResponseBuilder(httpStatus, contentType).bodyValueAndAwait(body)
 
     protected suspend inline fun <reified T : Any> buildResponse(
         flow: Flow<T>,
         httpStatus: HttpStatus = OK,
         contentType: MediaType = APPLICATION_JSON
     ): ServerResponse =
-        ServerResponse.status(httpStatus).contentType(contentType).bodyAndAwait(flow)
+        getServerResponseBuilder(httpStatus, contentType).bodyAndAwait(flow)
 
     protected fun ServerRequest.getQueryParamAsIntOrDefault(key: String, defaultValue: Int): Int = try {
         queryParamOrNull(key)?.toInt() ?: defaultValue
