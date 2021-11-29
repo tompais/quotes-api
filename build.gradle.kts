@@ -30,6 +30,7 @@ val snippetsDir by extra { file("build/generated-snippets") }
 val ktlint by configurations.creating
 
 dependencies {
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
@@ -37,19 +38,41 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
+
+    // Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+    // Migrations
     implementation("org.liquibase:liquibase-core")
+
+    // Dev Tools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // DB Drivers
     runtimeOnly("com.h2database:h2")
     runtimeOnly("io.r2dbc:r2dbc-h2")
+
+    // Annotation Processors
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // Tests
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(module = "mockito-core")
+    }
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
+    testImplementation("io.mockk:mockk:1.12.1")
+    testImplementation("com.ninja-squad:springmockk:3.0.1")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
+    testImplementation("io.rest-assured:spring-web-test-client:4.4.0")
+    testImplementation("io.rest-assured:rest-assured-common:4.4.0")
+    testImplementation("org.mock-server:mockserver-junit-jupiter:5.11.2")
+
+    // Linters
     ktlint("com.pinterest:ktlint:0.43.0") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))

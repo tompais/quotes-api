@@ -1,0 +1,17 @@
+logging:
+  level:
+    reactor:
+      netty:
+        http:
+          client: DEBUG
+
+clients:
+  programming-quote:
+    host: 'http://localhost:8081'
+    get-quotes: '/Quotes'
+  inspirational-quote:
+    host: 'http://localhost:8081'
+    get-quotes: '/quotes'
+  chuck-norris-quote:
+    host: 'http://localhost:8081'
+    get-quotes: '/jokes/random'
