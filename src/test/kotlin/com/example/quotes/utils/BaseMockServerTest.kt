@@ -54,7 +54,8 @@ abstract class BaseMockServerTest {
     private fun objectToJson(`object`: Any): String = objectMapper.writeValueAsString(`object`)
 
     private fun getRequestDefinition(
-        httpMethod: HttpMethod, path: String
+        httpMethod: HttpMethod,
+        path: String
     ): HttpRequest = request()
         .withMethod(httpMethod.name)
         .withPath(path)

@@ -113,7 +113,7 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "11"
         allWarningsAsErrors = true
     }
-    finalizedBy(tasks.check)
+    finalizedBy(ktlintCheck)
 }
 
 tasks.withType<Test> {
