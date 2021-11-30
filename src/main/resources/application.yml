@@ -3,7 +3,7 @@ logging:
     reactor:
       netty:
         http:
-          client: DEBUG
+          client: INFO
 
 clients:
   programming-quote:

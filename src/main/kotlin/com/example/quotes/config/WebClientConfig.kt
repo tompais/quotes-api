@@ -2,7 +2,7 @@ package com.example.quotes.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS
-import io.netty.handler.logging.LogLevel.DEBUG
+import io.netty.handler.logging.LogLevel.INFO
 import io.netty.handler.timeout.ReadTimeoutHandler
 import io.netty.handler.timeout.WriteTimeoutHandler
 import org.springframework.beans.factory.annotation.Value
@@ -30,7 +30,7 @@ class WebClientConfig {
         .doOnConnected { conn ->
             conn.addHandlerLast(ReadTimeoutHandler(5000, MILLISECONDS))
                 .addHandlerLast(WriteTimeoutHandler(5000, MILLISECONDS))
-        }.wiretap("reactor.netty.http.client.HttpClient", DEBUG, TEXTUAL)
+        }.wiretap("reactor.netty.http.client.HttpClient", INFO, TEXTUAL)
 
     private fun buildExchangeStrategies(objectMapper: ObjectMapper) = ExchangeStrategies
         .builder()
