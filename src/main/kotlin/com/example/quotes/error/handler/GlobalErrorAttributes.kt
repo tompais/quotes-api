@@ -33,7 +33,7 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
     override fun getErrorAttributes(request: ServerRequest?, options: ErrorAttributeOptions?): MutableMap<String, Any> =
         getError(request).let { error ->
             super.getErrorAttributes(request, options).also { errorAttributes ->
-                if (BAD_REQUEST_EXCEPTION_CLASSES.any { error::class.isSubclassOf(it) }) {
+                if (BAD_REQUEST_EXCEPTION_CLASSES.any(error::class::isSubclassOf)) {
                     errorAttributes["status"] = BAD_REQUEST.value()
                     errorAttributes["error"] = BAD_REQUEST.reasonPhrase
                 }
