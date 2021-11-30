@@ -33,5 +33,5 @@ class GlobalErrorWebExceptionHandler(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun logError(request: ServerRequest?, response: ServerResponse?, throwable: Throwable?) =
-        logger.error(throwable?.message, throwable)
+        logger.error(throwable?.message, throwable).also { super.logError(request, response, throwable) }
 }
