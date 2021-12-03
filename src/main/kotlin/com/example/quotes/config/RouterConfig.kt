@@ -12,7 +12,7 @@ class RouterConfig {
     @Bean
     @FlowPreview
     fun pingRoutes(pingController: IPingController) = coRouter {
-        GET("/ping") { _ ->
+        GET("/ping") {
             pingController.ping()
         }
     }
