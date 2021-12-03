@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import java.time.ZoneOffset
 import java.util.TimeZone
 
 @Configuration
@@ -26,7 +27,7 @@ class ObjectMapperConfig {
         .enable(ACCEPT_CASE_INSENSITIVE_ENUMS)
         .disable(WRITE_DATES_AS_TIMESTAMPS)
         .disable(FAIL_ON_UNKNOWN_PROPERTIES)
-        .defaultTimeZone(TimeZone.getTimeZone("UTC"))
+        .defaultTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC))
         .propertyNamingStrategy(SNAKE_CASE)
         .build()
 
