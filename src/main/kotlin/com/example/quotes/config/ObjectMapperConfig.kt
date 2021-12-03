@@ -31,6 +31,6 @@ class ObjectMapperConfig {
         .build()
 
     @Bean
-    fun mappingJackson2HttpMessageConverter(): MappingJackson2HttpMessageConverter =
-        MappingJackson2HttpMessageConverter(snakeCaseMapper())
+    fun mappingJackson2HttpMessageConverter(objectMapper: ObjectMapper): MappingJackson2HttpMessageConverter =
+        MappingJackson2HttpMessageConverter(objectMapper)
 }
